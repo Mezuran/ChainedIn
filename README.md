@@ -10,7 +10,25 @@
   Project Dedicated to Unikom Codelabs
 </p>
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/4ab29d49-6d47-4327-a566-5d78a7f3232f/deploy-status)](https://app.netlify.com/projects/codelabs-chainedin/deploys)
+<p>
+  <a href="https://github.com/Mezuran/ChainedIn/actions">
+    <img src="https://github.com/Mezuran/ChainedIn/actions/workflows/ci.yml/badge.svg" alt="SolidStart CI">
+  </a>
+  <a href="https://app.netlify.com/projects/codelabs-chainedin/deploys">
+    <img src="https://api.netlify.com/api/v1/badges/4ab29d49-6d47-4327-a566-5d78a7f3232f/deploy-status" alt="Netlify Status">
+  </a>
+  <a href="https://github.com/Mezuran/ChainedIn/network/dependencies">
+    <img src="https://badgen.net/badge/dependabot/enabled/green?icon=dependabot" alt="Dependabot">
+  </a>
+</p>
+
+<p>
+  <img src="https://img.shields.io/badge/node-%3E%3D20-success?logo=node.js" alt="Node Version">
+  <img src="https://img.shields.io/badge/pnpm-%234a4a4a.svg?style=flat&logo=pnpm&logoColor=f69220" alt="PNPM">
+  <img src="https://img.shields.io/badge/SolidJS-2c4f7c?style=flat&logo=solid&logoColor=c8c9cb" alt="SolidJS">
+  <img src="https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54" alt="Python">
+  <img src="https://img.shields.io/github/license/Mezuran/ChainedIn" alt="License">
+</p>
 
 </div>
 
