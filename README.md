@@ -9,10 +9,10 @@
   <b>A Budget Version of Linkedin With AI Powered. Written in JavaScript and Python</b><br>
   Project Dedicated to Unikom Codelabs
 </p>
+[![CI](https://github.com/Mezuran/ChainedIn/actions/workflows/ci.yml/badge.svg)](https://github.com/Mezuran/ChainedIn/actions/workflows/ci.yml)
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/Mezuran/ChainedIn)](https://nodejs.org/en/download)
+[![GitHub License](https://img.shields.io/github/license/Mezuran/ChainedIn)](LICENSE)
 
-[![CI]&#40;https://github.com/Mezuran/ChainedIn/actions/workflows/ci.yml/badge.svg&#41;]&#40;https://github.com/Mezuran/ChainedIn/actions/workflows/ci.yml&#41;
-[![GitHub package.json version]&#40;https://img.shields.io/github/package-json/v/Mezuran/ChainedIn&#41;]&#40;https://nodejs.org/en/download&#41;
-[![GitHub License]&#40;https://img.shields.io/github/license/Mezuran/ChainedIn&#41;]&#40;LICENSE&#41;
 
 </div>
 
