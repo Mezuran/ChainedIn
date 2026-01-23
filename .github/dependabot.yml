@@ -1,6 +1,6 @@
 version: 2
 updates:
-  - package-ecosystem: "npm" # Dependabot pakai kata "npm" untuk mendeteksi package.json/pnpm-lock.yaml
+  - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
@@ -9,6 +9,5 @@ updates:
       timezone: "Asia/Jakarta"
     open-pull-requests-limit: 10
 
-    # (Opsional) Kalo kamu gak mau update library tertentu, bisa di-ignore
     # ignore:
     #   - dependency-name: "typescript"
