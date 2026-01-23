@@ -13,7 +13,7 @@ jobs:
     steps:
       # 1. Checkout kode dari repository
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # 2. Install dan setup PNPM
       - name: Setup PNPM
