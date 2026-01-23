@@ -10,11 +10,9 @@
   Project Dedicated to Unikom Codelabs
 </p>
 
-[//]: # ([![CI]&#40;https://github.com/Mezuran/ChainedIn/actions/workflows/ci.yml/badge.svg&#41;]&#40;https://github.com/EndstoneMC/endstone/actions/workflows/ci.yml&#41;)
-
-[//]: # ([![GitHub package.json version]&#40;https://img.shields.io/github/package-json/v/Mezuran/ChainedIn&#41;]&#40;https://nodejs.org/en/download&#41;)
-
-[//]: # ([![GitHub License]&#40;https://img.shields.io/github/license/Mezuran/ChainedIn&#41;]&#40;LICENSE&#41;)
+[![CI]&#40;https://github.com/Mezuran/ChainedIn/actions/workflows/ci.yml/badge.svg&#41;]&#40;https://github.com/Mezuran/ChainedIn/actions/workflows/ci.yml&#41;
+[![GitHub package.json version]&#40;https://img.shields.io/github/package-json/v/Mezuran/ChainedIn&#41;]&#40;https://nodejs.org/en/download&#41;
+[![GitHub License]&#40;https://img.shields.io/github/license/Mezuran/ChainedIn&#41;]&#40;LICENSE&#41;
 
 </div>
 
