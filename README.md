@@ -10,6 +10,8 @@
   Project Dedicated to Unikom Codelabs
 </p>
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4ab29d49-6d47-4327-a566-5d78a7f3232f/deploy-status)](https://app.netlify.com/projects/codelabs-chainedin/deploys)
+
 </div>
 
 ## Why ChainedIn

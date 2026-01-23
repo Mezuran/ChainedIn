@@ -4,23 +4,34 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+
 jobs:
   build:
     name: Build and Check
     runs-on: ubuntu-latest
+
     steps:
+      # 1. Checkout kode dari repository
       - name: Checkout repo
         uses: actions/checkout@v4
+
+      # 2. Install dan setup PNPM
       - name: Setup PNPM
         uses: pnpm/action-setup@v3
         with:
           version: 10
+
+      # 3. Setup Node.js dan aktifkan Cache PNPM
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: 'pnpm'
+
+      # 4. Install Dependencies
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      # 5. Build Project SolidStart
       - name: Build SolidStart
         run: pnpm build
