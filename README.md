@@ -59,6 +59,67 @@ pnpm install
 pnpm run dev
 ```
 
+## Workflow
+
+### Persiapan (Sebelum Ngoding)
+```shell
+# 1. Pindah ke branch utama dulu
+git checkout main
+
+# 2. Tarik kodingan terbaru dari teman/server (Wajib!)
+git pull origin main
+
+# 3. (Khusus pengguna PNPM) Install ulang barangkali ada library baru
+pnpm install
+```
+
+### Mulai Ngoding (Buat Cabang Baru)
+```shell
+# Format: git checkout -b [nama-branch-baru]
+# Tips: Pakai awalan 'feat/' untuk fitur, 'fix/' untuk perbaikan error
+
+git checkout -b feat/tambah-badge-readme
+# atau
+git checkout -b fix/tombol-login-rusak  
+```
+
+### Simpan Perubahan (Commit)
+```shell
+# 1. Pilih file yang mau disimpan (titik artinya semua file)
+git add .
+
+# 2. Beri label pada bungkusan tersebut
+git commit -m "Update README dengan badge CI/CD baru"
+```
+
+### Upload ke GitHub (Push)
+```shell
+# Format: git push origin [nama-branch-kamu]
+
+git push origin feat/tambah-badge-readme
+```
+
+### Gabungkan (Pull Request / PR)
+1. Buka repository GitHub kamu di browser.
+2. Kamu akan melihat notifikasi kuning: "feat/tambah-badge-readme had recent pushes".
+3. Klik tombol hijau "Compare & pull request".
+4. Tulis deskripsi apa yang kamu ubah.
+5. Klik Create pull request.
+6. Tunggu GitHub Actions (CI) berjalan (cek apakah build sukses/gagal).
+7. Jika hijau (sukses), klik Merge pull request -> Confirm merge.
+
+### Bersih - Bersih (Setelah Merge)
+```shell
+# 1. Balik ke main
+git checkout main
+
+# 2. Tarik update terbaru (yang barusan kamu merge di web)
+git pull origin main
+
+# 3. Hapus branch lama (opsional, biar laptop ga penuh sampah branch)
+git branch -d feat/tambah-badge-readme
+```
+
 ## License
 
 ChainedIn is licensed under the [Apache-2.0 license](LICENSE).
