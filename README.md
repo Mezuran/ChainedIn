@@ -6,7 +6,7 @@
 <h3>ChainedIn</h3>
 
 <p>
-  <b>A Budget Version of Linkedin With AI Powered. Written in JavaScript and Python</b><br>
+  <b>A Budget aVersion of Linkedin With AI Powered. Written in JavaScript and Python</b><br>
   Project Dedicated to Unikom Codelabs
 </p>
 
