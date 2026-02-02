@@ -1,16 +1,21 @@
 {
-  "name": "example-with-tailwindcss",
+  "name": "chained-in",
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
-    "test": "vitest"
+    "test": "vitest",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.3.0",
+    "@prisma/client": "^7.3.0",
     "@solidjs/router": "^0.15.0",
     "@solidjs/start": "^1.1.0",
     "@supabase/supabase-js": "^2.91.0",
+    "dotenv": "^17.2.3",
+    "pg": "^8.18.0",
     "solid-js": "^1.9.5",
     "vinxi": "^0.5.7",
     "vite-plugin-solid": "^2.11.10",
@@ -20,8 +25,11 @@
     "@solidjs/testing-library": "^0.8.10",
     "@tailwindcss/vite": "^4.0.7",
     "@testing-library/jest-dom": "^6.9.1",
+    "@types/pg": "^8.16.0",
     "jsdom": "^27.4.0",
+    "prisma": "^7.3.0",
     "tailwindcss": "^4.0.7",
+    "tsx": "^4.21.0",
     "vitest": "^4.0.18"
   },
   "engines": {

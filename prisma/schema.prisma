@@ -1,0 +1,135 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../.generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ApplicationStatus {
+  Applied
+  Rejected
+  Acceptrd
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model Applications {
+  id      Int                @id @default(autoincrement())
+  user_id String?            @db.Uuid
+  job_id  Int?
+  status  ApplicationStatus? @default(Applied)
+  jobs    Jobs?              @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users   Users?             @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model Badges {
+  id          Int          @id @default(autoincrement())
+  name        String       @unique @db.VarChar(100)
+  description String?
+  user_badges UserBadges[]
+}
+
+model Companies {
+  id           Int     @id @default(autoincrement())
+  owner_id     String? @db.Uuid
+  company_name String  @db.VarChar(150)
+  description  String?
+  email        String? @db.VarChar(150)
+  location     String? @db.VarChar(150)
+  website      String? @db.VarChar(150)
+  users        Users?  @relation(fields: [owner_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  jobs         Jobs[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model JobSkills {
+  id             Int     @id @default(autoincrement())
+  job_id         Int?
+  skill_id       Int?
+  required_level Int?
+  jobs           Jobs?   @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  skills         Skills? @relation(fields: [skill_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model Jobs {
+  id            Int            @id @default(autoincrement())
+  company_id    Int?
+  category      String?        @db.VarChar(100)
+  title         String         @db.VarChar(150)
+  description   String?
+  salary        String?        @db.VarChar(100)
+  is_active     Boolean?       @default(true)
+  applications  Applications[]
+  job_skills    JobSkills[]
+  companies     Companies?     @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  match_results MatchResults[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model MatchResults {
+  id                  Int      @id @default(autoincrement())
+  user_id             String?  @db.Uuid
+  job_id              Int?
+  match_percentage    Decimal? @db.Decimal(5, 2)
+  recommendation_type String?  @db.VarChar(50)
+  jobs                Jobs?    @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users               Users?   @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model Roles {
+  id    Int     @id @default(autoincrement())
+  name  String  @unique @db.VarChar(50)
+  users Users[]
+}
+
+model Skills {
+  id          Int          @id @default(autoincrement())
+  name        String       @unique @db.VarChar(100)
+  job_skills  JobSkills[]
+  user_skills UserSkills[]
+}
+
+model UserBadges {
+  id       Int     @id @default(autoincrement())
+  user_id  String? @db.Uuid
+  badge_id Int?
+  badges   Badges? @relation(fields: [badge_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users    Users?  @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model UserEducations {
+  id               Int     @id @default(autoincrement())
+  user_id          String? @db.Uuid
+  level            String  @db.VarChar(50)
+  institution_name String  @db.VarChar(150)
+  graduation_year  Int?
+  users            Users?  @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model UserSkills {
+  id       Int     @id @default(autoincrement())
+  user_id  String? @db.Uuid
+  skill_id Int?
+  level    Int?
+  skills   Skills? @relation(fields: [skill_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users    Users?  @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model Users {
+  id              String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  role_id         Int?
+  full_name       String           @db.VarChar(150)
+  email           String           @unique @db.VarChar(150)
+  password        String
+  bio             String?
+  is_verified     Boolean?         @default(false)
+  applications    Applications[]
+  companies       Companies[]
+  match_results   MatchResults[]
+  user_badges     UserBadges[]
+  user_educations UserEducations[]
+  user_skills     UserSkills[]
+  roles           Roles?           @relation(fields: [role_id], references: [id], onUpdate: NoAction)
+}
