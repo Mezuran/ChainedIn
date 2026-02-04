@@ -9,14 +9,13 @@ export default defineConfig({
     ],
     test: {
         environment: "jsdom",
+        passWithNoTests: true,
         globals: true,
         setupFiles: ["./setup.vitest.ts"],
         css: false,
         deps: {
             optimizer: {
-                web: {
-                    include: ["solid-js"],
-                },
+                web: { include: ["solid-js"], },
             },
         },
     },
