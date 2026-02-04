@@ -14,7 +14,7 @@
     "@solidjs/router": "^0.15.0",
     "@solidjs/start": "^1.1.0",
     "@supabase/ssr": "^0.8.0",
-    "@supabase/supabase-js": "^2.91.0",
+    "@supabase/supabase-js": "^2.94.1",
     "dotenv": "^17.2.3",
     "pg": "^8.18.0",
     "solid-js": "^1.9.5",
