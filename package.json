@@ -17,7 +17,7 @@
     "@supabase/supabase-js": "^2.91.0",
     "dotenv": "^17.2.3",
     "pg": "^8.18.0",
-    "solid-js": "^1.9.5",
+    "solid-js": "^1.9.11",
     "vinxi": "^0.5.7",
     "vite-plugin-solid": "^2.11.10",
     "vite-tsconfig-paths": "^6.0.4"
