@@ -1,6 +1,5 @@
 import { createServerClient, parseCookieHeader, serializeCookieHeader } from "@supabase/ssr";
 import { getRequestEvent } from "solid-js/web"
-import { H3Event } from "vinxi/http"
 
 export function createSupabaseServer(eventOrNull) {
     const event = eventOrNull ?? getRequestEvent()

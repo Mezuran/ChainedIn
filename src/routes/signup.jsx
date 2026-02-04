@@ -1,5 +1,5 @@
 import { action, redirect } from "@solidjs/router";
-import { createSupabaseServer } from "~/lib/supabase";
+import { createSupabaseServer } from "~/libs/supabase";
 
 async function handleSignUp(formData) {
     "use server"
