@@ -1,6 +1,31 @@
-import { createClient } from '@supabase/supabase-js';
+import { createServerClient, parseCookieHeader, serializeCookieHeader } from "@supabase/ssr";
+import { getRequestEvent } from "solid-js/web"
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+export function createSupabaseServer(eventOrNull) {
+    const event = eventOrNull ?? getRequestEvent()
+    if (!event) {
+        throw new Error("No request event found. Are you using this on the client?");
+    }
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+    return createServerClient(
+        import.meta.env.VITE_SUPABASE_URL,
+        import.meta.env.VITE_SUPABASE_ANON_KEY,
+        {
+            cookies: {
+                getAll() { return parseCookieHeader(event.request.headers.get("Cookie") ?? ""); },
+                setAll(cookies) {
+                    try {
+                        cookies.forEach(({name, value, options}) => {
+                            event.response.headers.append(
+                                "Set-Cookie",
+                                serializeCookieHeader(name, value, options)
+                            );
+                        });
+                    } catch (error) {
+                        // TODO: Handle the error.
+                    }
+                }
+            }
+        }
+    )
+}
