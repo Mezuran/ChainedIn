@@ -8,16 +8,4 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/Applications.ts'
-export type * from './models/Badges.ts'
-export type * from './models/Companies.ts'
-export type * from './models/JobSkills.ts'
-export type * from './models/Jobs.ts'
-export type * from './models/MatchResults.ts'
-export type * from './models/Roles.ts'
-export type * from './models/Skills.ts'
-export type * from './models/UserBadges.ts'
-export type * from './models/UserEducations.ts'
-export type * from './models/UserSkills.ts'
-export type * from './models/Users.ts'
 export type * from './commonInputTypes.ts'

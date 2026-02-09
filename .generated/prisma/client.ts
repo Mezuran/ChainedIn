@@ -29,8 +29,8 @@ export * from "./enums.ts"
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Applications
- * const applications = await prisma.applications.findMany()
+ * // Fetch zero or more Users
+ * const users = await prisma.user.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -39,63 +39,4 @@ export const PrismaClient = $Class.getPrismaClientClass()
 export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts extends Prisma.PrismaClientOptions["omit"] = Prisma.PrismaClientOptions["omit"], ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = $Class.PrismaClient<LogOpts, OmitOpts, ExtArgs>
 export { Prisma }
 
-/**
- * Model Applications
- * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
- */
-export type Applications = Prisma.ApplicationsModel
-/**
- * Model Badges
- * 
- */
-export type Badges = Prisma.BadgesModel
-/**
- * Model Companies
- * 
- */
-export type Companies = Prisma.CompaniesModel
-/**
- * Model JobSkills
- * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
- */
-export type JobSkills = Prisma.JobSkillsModel
-/**
- * Model Jobs
- * 
- */
-export type Jobs = Prisma.JobsModel
-/**
- * Model MatchResults
- * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
- */
-export type MatchResults = Prisma.MatchResultsModel
-/**
- * Model Roles
- * 
- */
-export type Roles = Prisma.RolesModel
-/**
- * Model Skills
- * 
- */
-export type Skills = Prisma.SkillsModel
-/**
- * Model UserBadges
- * 
- */
-export type UserBadges = Prisma.UserBadgesModel
-/**
- * Model UserEducations
- * 
- */
-export type UserEducations = Prisma.UserEducationsModel
-/**
- * Model UserSkills
- * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
- */
-export type UserSkills = Prisma.UserSkillsModel
-/**
- * Model Users
- * 
- */
-export type Users = Prisma.UsersModel
+

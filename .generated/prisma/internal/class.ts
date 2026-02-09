@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.3.0",
   "engineVersion": "9d6ad21cbbceab97458517b147a6a09ff43aa735",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../.generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nenum ApplicationStatus {\n  Applied\n  Rejected\n  Acceptrd\n}\n\n/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.\nmodel Applications {\n  id      Int                @id @default(autoincrement())\n  user_id String?            @db.Uuid\n  job_id  Int?\n  status  ApplicationStatus? @default(Applied)\n  jobs    Jobs?              @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: NoAction)\n  users   Users?             @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)\n}\n\nmodel Badges {\n  id          Int          @id @default(autoincrement())\n  name        String       @unique @db.VarChar(100)\n  description String?\n  user_badges UserBadges[]\n}\n\nmodel Companies {\n  id           Int     @id @default(autoincrement())\n  owner_id     String? @db.Uuid\n  company_name String  @db.VarChar(150)\n  description  String?\n  email        String? @db.VarChar(150)\n  location     String? @db.VarChar(150)\n  website      String? @db.VarChar(150)\n  users        Users?  @relation(fields: [owner_id], references: [id], onDelete: Cascade, onUpdate: NoAction)\n  jobs         Jobs[]\n}\n\n/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.\nmodel JobSkills {\n  id             Int     @id @default(autoincrement())\n  job_id         Int?\n  skill_id       Int?\n  required_level Int?\n  jobs           Jobs?   @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: NoAction)\n  skills         Skills? @relation(fields: [skill_id], references: [id], onDelete: Cascade, onUpdate: NoAction)\n}\n\nmodel Jobs {\n  id            Int            @id @default(autoincrement())\n  company_id    Int?\n  category      String?        @db.VarChar(100)\n  title         String         @db.VarChar(150)\n  description   String?\n  salary        String?        @db.VarChar(100)\n  is_active     Boolean?       @default(true)\n  applications  Applications[]\n  job_skills    JobSkills[]\n  companies     Companies?     @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction)\n  match_results MatchResults[]\n}\n\n/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.\nmodel MatchResults {\n  id                  Int      @id @default(autoincrement())\n  user_id             String?  @db.Uuid\n  job_id              Int?\n  match_percentage    Decimal? @db.Decimal(5, 2)\n  recommendation_type String?  @db.VarChar(50)\n  jobs                Jobs?    @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: NoAction)\n  users               Users?   @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)\n}\n\nmodel Roles {\n  id    Int     @id @default(autoincrement())\n  name  String  @unique @db.VarChar(50)\n  users Users[]\n}\n\nmodel Skills {\n  id          Int          @id @default(autoincrement())\n  name        String       @unique @db.VarChar(100)\n  job_skills  JobSkills[]\n  user_skills UserSkills[]\n}\n\nmodel UserBadges {\n  id       Int     @id @default(autoincrement())\n  user_id  String? @db.Uuid\n  badge_id Int?\n  badges   Badges? @relation(fields: [badge_id], references: [id], onDelete: Cascade, onUpdate: NoAction)\n  users    Users?  @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)\n}\n\nmodel UserEducations {\n  id               Int     @id @default(autoincrement())\n  user_id          String? @db.Uuid\n  level            String  @db.VarChar(50)\n  institution_name String  @db.VarChar(150)\n  graduation_year  Int?\n  users            Users?  @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)\n}\n\n/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.\nmodel UserSkills {\n  id       Int     @id @default(autoincrement())\n  user_id  String? @db.Uuid\n  skill_id Int?\n  level    Int?\n  skills   Skills? @relation(fields: [skill_id], references: [id], onDelete: Cascade, onUpdate: NoAction)\n  users    Users?  @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)\n}\n\nmodel Users {\n  id              String           @id @default(dbgenerated(\"gen_random_uuid()\")) @db.Uuid\n  role_id         Int?\n  full_name       String           @db.VarChar(150)\n  email           String           @unique @db.VarChar(150)\n  password        String\n  bio             String?\n  is_verified     Boolean?         @default(false)\n  applications    Applications[]\n  companies       Companies[]\n  match_results   MatchResults[]\n  user_badges     UserBadges[]\n  user_educations UserEducations[]\n  user_skills     UserSkills[]\n  roles           Roles?           @relation(fields: [role_id], references: [id], onUpdate: NoAction)\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../.generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Applications\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"job_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"ApplicationStatus\"},{\"name\":\"jobs\",\"kind\":\"object\",\"type\":\"Jobs\",\"relationName\":\"ApplicationsToJobs\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"Users\",\"relationName\":\"ApplicationsToUsers\"}],\"dbName\":null},\"Badges\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_badges\",\"kind\":\"object\",\"type\":\"UserBadges\",\"relationName\":\"BadgesToUserBadges\"}],\"dbName\":null},\"Companies\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"owner_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"company_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"location\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"website\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"Users\",\"relationName\":\"CompaniesToUsers\"},{\"name\":\"jobs\",\"kind\":\"object\",\"type\":\"Jobs\",\"relationName\":\"CompaniesToJobs\"}],\"dbName\":null},\"JobSkills\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"job_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"skill_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"required_level\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"jobs\",\"kind\":\"object\",\"type\":\"Jobs\",\"relationName\":\"JobSkillsToJobs\"},{\"name\":\"skills\",\"kind\":\"object\",\"type\":\"Skills\",\"relationName\":\"JobSkillsToSkills\"}],\"dbName\":null},\"Jobs\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"company_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"category\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"salary\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"is_active\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"applications\",\"kind\":\"object\",\"type\":\"Applications\",\"relationName\":\"ApplicationsToJobs\"},{\"name\":\"job_skills\",\"kind\":\"object\",\"type\":\"JobSkills\",\"relationName\":\"JobSkillsToJobs\"},{\"name\":\"companies\",\"kind\":\"object\",\"type\":\"Companies\",\"relationName\":\"CompaniesToJobs\"},{\"name\":\"match_results\",\"kind\":\"object\",\"type\":\"MatchResults\",\"relationName\":\"JobsToMatchResults\"}],\"dbName\":null},\"MatchResults\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"job_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"match_percentage\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"recommendation_type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"jobs\",\"kind\":\"object\",\"type\":\"Jobs\",\"relationName\":\"JobsToMatchResults\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"Users\",\"relationName\":\"MatchResultsToUsers\"}],\"dbName\":null},\"Roles\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"Users\",\"relationName\":\"RolesToUsers\"}],\"dbName\":null},\"Skills\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"job_skills\",\"kind\":\"object\",\"type\":\"JobSkills\",\"relationName\":\"JobSkillsToSkills\"},{\"name\":\"user_skills\",\"kind\":\"object\",\"type\":\"UserSkills\",\"relationName\":\"SkillsToUserSkills\"}],\"dbName\":null},\"UserBadges\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"badge_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"badges\",\"kind\":\"object\",\"type\":\"Badges\",\"relationName\":\"BadgesToUserBadges\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"Users\",\"relationName\":\"UserBadgesToUsers\"}],\"dbName\":null},\"UserEducations\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"level\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"institution_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"graduation_year\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"Users\",\"relationName\":\"UserEducationsToUsers\"}],\"dbName\":null},\"UserSkills\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"skill_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"level\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"skills\",\"kind\":\"object\",\"type\":\"Skills\",\"relationName\":\"SkillsToUserSkills\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"Users\",\"relationName\":\"UserSkillsToUsers\"}],\"dbName\":null},\"Users\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"full_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bio\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"is_verified\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"applications\",\"kind\":\"object\",\"type\":\"Applications\",\"relationName\":\"ApplicationsToUsers\"},{\"name\":\"companies\",\"kind\":\"object\",\"type\":\"Companies\",\"relationName\":\"CompaniesToUsers\"},{\"name\":\"match_results\",\"kind\":\"object\",\"type\":\"MatchResults\",\"relationName\":\"MatchResultsToUsers\"},{\"name\":\"user_badges\",\"kind\":\"object\",\"type\":\"UserBadges\",\"relationName\":\"UserBadgesToUsers\"},{\"name\":\"user_educations\",\"kind\":\"object\",\"type\":\"UserEducations\",\"relationName\":\"UserEducationsToUsers\"},{\"name\":\"user_skills\",\"kind\":\"object\",\"type\":\"UserSkills\",\"relationName\":\"UserSkillsToUsers\"},{\"name\":\"roles\",\"kind\":\"object\",\"type\":\"Roles\",\"relationName\":\"RolesToUsers\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -60,8 +60,8 @@ export interface PrismaClientConstructor {
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Applications
-   * const applications = await prisma.applications.findMany()
+   * // Fetch zero or more Users
+   * const users = await prisma.user.findMany()
    * ```
    * 
    * Read more in our [docs](https://pris.ly/d/client).
@@ -82,8 +82,8 @@ export interface PrismaClientConstructor {
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Applications
- * const applications = await prisma.applications.findMany()
+ * // Fetch zero or more Users
+ * const users = await prisma.user.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -176,125 +176,7 @@ export interface PrismaClient<
     extArgs: ExtArgs
   }>>
 
-      /**
-   * `prisma.applications`: Exposes CRUD operations for the **Applications** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Applications
-    * const applications = await prisma.applications.findMany()
-    * ```
-    */
-  get applications(): Prisma.ApplicationsDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.badges`: Exposes CRUD operations for the **Badges** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Badges
-    * const badges = await prisma.badges.findMany()
-    * ```
-    */
-  get badges(): Prisma.BadgesDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.companies`: Exposes CRUD operations for the **Companies** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Companies
-    * const companies = await prisma.companies.findMany()
-    * ```
-    */
-  get companies(): Prisma.CompaniesDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.jobSkills`: Exposes CRUD operations for the **JobSkills** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more JobSkills
-    * const jobSkills = await prisma.jobSkills.findMany()
-    * ```
-    */
-  get jobSkills(): Prisma.JobSkillsDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.jobs`: Exposes CRUD operations for the **Jobs** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Jobs
-    * const jobs = await prisma.jobs.findMany()
-    * ```
-    */
-  get jobs(): Prisma.JobsDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.matchResults`: Exposes CRUD operations for the **MatchResults** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more MatchResults
-    * const matchResults = await prisma.matchResults.findMany()
-    * ```
-    */
-  get matchResults(): Prisma.MatchResultsDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.roles`: Exposes CRUD operations for the **Roles** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Roles
-    * const roles = await prisma.roles.findMany()
-    * ```
-    */
-  get roles(): Prisma.RolesDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.skills`: Exposes CRUD operations for the **Skills** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Skills
-    * const skills = await prisma.skills.findMany()
-    * ```
-    */
-  get skills(): Prisma.SkillsDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.userBadges`: Exposes CRUD operations for the **UserBadges** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more UserBadges
-    * const userBadges = await prisma.userBadges.findMany()
-    * ```
-    */
-  get userBadges(): Prisma.UserBadgesDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.userEducations`: Exposes CRUD operations for the **UserEducations** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more UserEducations
-    * const userEducations = await prisma.userEducations.findMany()
-    * ```
-    */
-  get userEducations(): Prisma.UserEducationsDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.userSkills`: Exposes CRUD operations for the **UserSkills** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more UserSkills
-    * const userSkills = await prisma.userSkills.findMany()
-    * ```
-    */
-  get userSkills(): Prisma.UserSkillsDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.users`: Exposes CRUD operations for the **Users** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Users
-    * const users = await prisma.users.findMany()
-    * ```
-    */
-  get users(): Prisma.UsersDelegate<ExtArgs, { omit: OmitOpts }>;
+    
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {
