@@ -15,7 +15,7 @@
     "@solidjs/start": "^1.1.0",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.91.0",
-    "dotenv": "^17.2.3",
+    "dotenv": "^17.2.4",
     "pg": "^8.18.0",
     "solid-js": "^1.9.5",
     "vinxi": "^0.5.7",
